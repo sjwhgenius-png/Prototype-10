@@ -10,389 +10,200 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Source+Sans+3:wght@600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Source+Sans+3:wght@600;700;800;900&display=swap" rel="stylesheet">
 
-  <style>
-    :root{
-      --navy:#061a33;
-      --accent:#124E8C;
-      --cta:#FF7A00;
-      --bg:#f6f8fc;
-      --text:#0b1220;
-      --muted:rgba(11,18,32,.72);
-      --border:rgba(18,78,140,.25);
-      --radius:18px;
-      --shadow:0 14px 36px rgba(11,18,32,.10);
-    }
-
-    *{ box-sizing:border-box; }
-    html{ scroll-behavior:smooth; -webkit-text-size-adjust:100%; }
-    body{
-      margin:0;
-      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-      background:var(--bg);
-      color:var(--text);
-      line-height:1.55;
-      overflow-x:hidden;
-
-      /* iPhone notch-safe padding so text never touches the edge */
-      padding-left: max(0px, env(safe-area-inset-left));
-      padding-right:max(0px, env(safe-area-inset-right));
-    }
-
-    a{ color:inherit; text-decoration:none; }
-    a:hover{ text-decoration:underline; text-underline-offset:4px; }
-
-    /* Better mobile spacing: small on phone, normal on desktop */
-    .container{
-      max-width:1120px;
-      margin:0 auto;
-      padding: 0 clamp(14px, 4vw, 24px);
-    }
-
-    /* TOP BAR (make it look clean on phone) */
-    .topbar{
-      background:var(--navy);
-      color:#fff;
-      font-weight:800;
-      font-size:13px;
-    }
-    .topbar__inner{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:10px;
-      padding:10px 0;
-      flex-wrap:nowrap;             /* keep it tidy */
-    }
-    .topbar__inner span:first-child{
-      overflow:hidden;
-      text-overflow:ellipsis;
-      white-space:nowrap;
-    }
-    .topbar__inner span:last-child{
-      white-space:nowrap;
-      opacity:.95;
-    }
-    .topbar__inner a:hover{ text-decoration:none; opacity:1; }
-
-    /* HEADER */
-    header{
-      background:rgba(255,255,255,.92);
-      border-bottom:1px solid var(--border);
-      backdrop-filter: blur(10px);
-      position:sticky;
-      top:0;
-      z-index:10;
-    }
-    .header__inner{
-      display:grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items:center;
-      gap:14px;
-      padding:14px 0;
-    }
-
-    /* Brand: prevent squeezing on small widths */
-    .brand{
-      display:flex;
-      flex-direction:column;
-      gap:3px;
-      min-width:0;
-    }
-    .brand strong{
-      font-weight:900;
-      letter-spacing:-0.01em;
-      overflow:hidden;
-      text-overflow:ellipsis;
-      white-space:nowrap;
-    }
-    .brand span{
-      color:var(--muted);
-      font-weight:700;
-      font-size:12px;
-      overflow:hidden;
-      text-overflow:ellipsis;
-      white-space:nowrap;
-    }
-
-    nav{
-      display:flex;
-      gap:14px;
-      justify-content:center;
-      font-weight:800;
-      flex-wrap:wrap;
-    }
-    nav a{
-      padding:10px 12px;
-      border-radius:12px;
-      line-height:1;
-      color:rgba(11,18,32,.78);
-    }
-    nav a:hover{
-      background:rgba(18,78,140,.08);
-      text-decoration:none;
-      color:rgba(11,18,32,.92);
-    }
-
-    .header__actions{
-      display:flex;
-      gap:10px;
-      justify-content:flex-end;
-      flex-wrap:wrap;
-    }
-
-    /* BUTTONS */
-    .btn{
-      padding:12px 18px;
-      border-radius:999px;
-      font-weight:900;
-      border:1px solid transparent;
-      white-space:nowrap;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-height:44px; /* good tap target */
-    }
-    .btn--cta{
-      background:var(--cta);
-      color:#fff;
-      box-shadow:0 10px 26px rgba(255,122,0,.22);
-    }
-    .btn--cta:hover{ opacity:.96; text-decoration:none; }
-    .btn--ghost{
-      background:#fff;
-      border-color:var(--border);
-    }
-    .btn--ghost:hover{ background:rgba(18,78,140,.06); text-decoration:none; }
-
-    /* HERO */
-    .hero{
-      padding: clamp(28px, 5.5vw, 56px) 0;
-    }
-    .hero__card{
-      background:#fff;
-      padding: clamp(18px, 4.2vw, 36px);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      border: 1px solid rgba(255,255,255,.7);
-    }
-    .hero h1{
-      font-family:"Source Sans 3", Inter, sans-serif;
-      font-size: clamp(30px, 6.2vw, 56px);
-      line-height:1.06;
-      margin:0 0 12px;
-      font-weight:900;
-      letter-spacing:-0.02em;
-    }
-    .hero p{
-      font-size: clamp(15px, 2.2vw, 16px);
-      line-height:1.65;
-      color:var(--muted);
-      margin:0 0 14px;
-      max-width: 68ch;
-    }
-    .hero__actions{
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-      margin-top:14px;
-    }
-
-    /* SECTIONS */
-    section{
-      padding: clamp(28px, 5vw, 44px) 0;
-    }
-    section.alt{
-      background:rgba(18,78,140,.04);
-      border-top:1px solid rgba(11,18,32,.10);
-      border-bottom:1px solid rgba(11,18,32,.10);
-    }
-    h2{
-      margin:0 0 10px;
-      font-size: clamp(22px, 4.2vw, 28px);
-      letter-spacing:-0.01em;
-    }
-
-    /* CARDS (responsive: 1 -> 2 -> 3) */
-    .grid{
-      display:grid;
-      grid-template-columns: 1fr;
-      gap:16px;
-      margin-top:18px;
-    }
-    @media (min-width: 640px){
-      .grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    }
-    @media (min-width: 980px){
-      .grid{ grid-template-columns: repeat(3, minmax(0, 1fr)); }
-    }
-
-    .card{
-      background:#fff;
-      border:1px solid var(--border);
-      border-radius:var(--radius);
-      padding: 18px 18px 18px 20px;
-      box-shadow:var(--shadow);
-    }
-    .card h3{
-      margin:0 0 8px;
-      font-size:15px;
-      font-weight:900;
-    }
-    .card p{
-      margin:0;
-      color:var(--muted);
-      font-size:14.5px;
-      line-height:1.55;
-    }
-
-    /* FOOTER */
-    footer{
-      background:rgba(255,255,255,.92);
-      border-top:1px solid rgba(11,18,32,.10);
-      padding:22px 0;
-      font-size:13px;
-      color:var(--muted);
-    }
-    .footer__top{
-      display:flex;
-      justify-content:space-between;
-      flex-wrap:wrap;
-      gap:12px;
-      margin-bottom:14px;
-      font-weight:700;
-    }
-
-    /* PHONE TWEAKS: make actions stack nicely */
-    @media (max-width: 900px){
-      .header__inner{ grid-template-columns: 1fr; }
-      nav{ justify-content:flex-start; }
-      .header__actions{ justify-content:flex-start; }
-    }
-    @media (max-width: 420px){
-      .hero__actions .btn{ width:100%; }
-      .header__actions .btn{ width:auto; }
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
 
-<!-- TOP BAR -->
-<div class="topbar">
-  <div class="container topbar__inner">
-    <span>$0 down 0 hassles — We do ALL the paperwork</span>
-    <span>
-      <a href="tel:+61415339117">Call</a> •
-      <a href="sms:+61415339117">SMS</a>
-    </span>
-  </div>
-</div>
-
-<!-- HEADER -->
-<header>
-  <div class="container header__inner">
-    <div class="brand">
-      <strong>Greater Western Sydney Injury Dental</strong>
-      <span>Hawkesbury • Nepean • Blue Mountains</span>
-    </div>
-
-    <nav>
-      <a href="#help">Support</a>
-      <a href="#injuries">Injuries</a>
-      <a href="#areas">Areas</a>
-    </nav>
-
-    <div class="header__actions">
-      <a class="btn btn--cta" href="tel:+61415339117">Call</a>
-      <a class="btn btn--ghost" href="sms:+61415339117">SMS</a>
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="container topbar__inner">
+      <div class="topbar__msg">$0 down 0 hassles — We do ALL the paperwork</div>
+      <div class="topbar__links">
+        <a class="topbar__link" href="tel:+61415339117">Call</a>
+        <span class="dot">•</span>
+        <a class="topbar__link" href="sms:+61415339117">SMS</a>
+      </div>
     </div>
   </div>
-</header>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="container hero__card">
-    <h1>$0 down 0 hassles</h1>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="container header__inner">
+      <div class="brand">
+        <div class="brand__name">Greater Western Sydney Injury Dental</div>
+        <div class="brand__tag">Hawkesbury • Nepean • Blue Mountains</div>
+      </div>
 
-    <p>
-      WorkCover dental support for injured workers across
-      <strong>Western Sydney</strong>, <strong>Hawkesbury–Nepean</strong> and the
-      <strong>Blue Mountains</strong>. We guide you and handle the paperwork.
-    </p>
+      <nav class="nav" aria-label="Primary">
+        <button class="nav__toggle" type="button" aria-label="Open menu" aria-controls="navMenu" aria-expanded="false">
+          <span class="bars" aria-hidden="true"></span>
+        </button>
 
-    <div class="hero__actions">
-      <a class="btn btn--cta" href="tel:+61415339117">Call +61 415 339 117</a>
-      <a class="btn btn--ghost" href="sms:+61415339117">SMS</a>
+        <div id="navMenu" class="nav__menu">
+          <a class="nav__link" href="#help">Support</a>
+          <a class="nav__link" href="#injuries">Injuries</a>
+          <a class="nav__link" href="#areas">Areas</a>
+          <a class="nav__link nav__link--cta" href="#contact">Contact</a>
+        </div>
+      </nav>
+
+      <div class="header__actions">
+        <a class="btn btn--cta" href="tel:+61415339117">Call</a>
+        <a class="btn btn--ghost" href="sms:+61415339117">SMS</a>
+      </div>
     </div>
+  </header>
 
-    <p style="margin-top:14px;font-size:13px;">
-      If there is heavy bleeding, severe pain, or a medical emergency call <strong>000</strong>.
-    </p>
-  </div>
-</section>
+  <!-- HERO -->
+  <section class="hero" id="contact">
+    <div class="container">
+      <div class="hero__card">
+        <div class="badge-row">
+          <span class="badge badge--primary">WorkCover support</span>
+          <span class="badge badge--green">$0 down where eligible</span>
+        </div>
 
-<!-- HOW WE HELP -->
-<section id="help">
-  <div class="container">
-    <h2>How we help</h2>
-    <div class="grid">
-      <div class="card"><h3>Paperwork handled</h3><p>We assist with WorkCover documentation so it’s not on you.</p></div>
-      <div class="card"><h3>Clear next steps</h3><p>Call or SMS and we’ll explain what to do next.</p></div>
-      <div class="card"><h3>$0 down where eligible</h3><p>Subject to insurer approval and determination.</p></div>
+        <h1 class="hero__title">$0 down 0 hassles</h1>
+
+        <p class="hero__sub">
+          WorkCover dental support for injured workers across
+          <strong>Western Sydney</strong>, <strong>Hawkesbury–Nepean</strong> and the
+          <strong>Blue Mountains</strong>. We guide you and handle the paperwork.
+        </p>
+
+        <div class="hero__actions">
+          <a class="btn btn--cta" href="tel:+61415339117">Call +61 415 339 117</a>
+          <a class="btn btn--ghost" href="sms:+61415339117">SMS</a>
+        </div>
+
+        <p class="hero__disclaimer tiny">
+          If there is heavy bleeding, severe pain, or a medical emergency call <strong>000</strong>.
+        </p>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- INJURIES -->
-<section class="alt" id="injuries">
-  <div class="container">
-    <h2>Common work-related dental injuries</h2>
-    <div class="grid">
-      <div class="card"><h3>Chipped or broken teeth</h3><p>Falls, impact or workplace accidents.</p></div>
-      <div class="card"><h3>Knocked or loose teeth</h3><p>Often urgent and may require stabilisation.</p></div>
-      <div class="card"><h3>Jaw or facial trauma</h3><p>Swelling, pain or bite changes.</p></div>
+  <!-- HOW WE HELP -->
+  <section class="section" id="help">
+    <div class="container">
+      <h2>How we help</h2>
+      <p class="section-desc">A simple process. Call or SMS, and we’ll guide you through the next steps.</p>
+
+      <div class="card-grid">
+        <div class="card accent">
+          <h3>Paperwork handled</h3>
+          <p>We assist with WorkCover documentation so it’s not on you.</p>
+        </div>
+        <div class="card accent">
+          <h3>Clear next steps</h3>
+          <p>Call or SMS and we’ll explain what to do next.</p>
+        </div>
+        <div class="card accent">
+          <h3>$0 down where eligible</h3>
+          <p>Subject to insurer approval and determination.</p>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- AREAS -->
-<section id="areas">
-  <div class="container">
-    <h2>Service areas</h2>
-    <div class="grid">
-      <div class="card"><h3>Greater Western Sydney</h3><p>Parramatta, Blacktown, Mount Druitt and surrounding suburbs.</p></div>
-      <div class="card"><h3>Hawkesbury–Nepean</h3><p>Penrith, St Marys, Windsor, Richmond and surrounds.</p></div>
-      <div class="card"><h3>Blue Mountains</h3><p>Katoomba, Springwood, Lawson, Leura and surrounds.</p></div>
+  <!-- INJURIES -->
+  <section class="section alt" id="injuries">
+    <div class="container">
+      <h2>Common work-related dental injuries</h2>
+      <p class="section-desc">If you’re unsure, call or SMS and we’ll tell you what to do next.</p>
+
+      <div class="card-grid">
+        <div class="card">
+          <h3>Chipped or broken teeth</h3>
+          <p>Falls, impact or workplace accidents.</p>
+        </div>
+        <div class="card">
+          <h3>Knocked or loose teeth</h3>
+          <p>Often urgent and may require stabilisation.</p>
+        </div>
+        <div class="card">
+          <h3>Jaw or facial trauma</h3>
+          <p>Swelling, pain or bite changes.</p>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- FOOTER + DISCLAIMER -->
-<footer>
-  <div class="container">
-    <div class="footer__top">
-      <span>© <span id="year"></span> Greater Western Sydney Injury Dental</span>
-      <span>
-        <a href="tel:+61415339117">+61 415 339 117</a> •
+  <!-- AREAS -->
+  <section class="section" id="areas">
+    <div class="container">
+      <h2>Service areas</h2>
+      <p class="section-desc">We support injured workers across Greater Western Sydney and nearby regions.</p>
+
+      <div class="card-grid">
+        <div class="card">
+          <h3>Greater Western Sydney</h3>
+          <p>Parramatta, Blacktown, Mount Druitt and surrounding suburbs.</p>
+        </div>
+        <div class="card">
+          <h3>Hawkesbury–Nepean</h3>
+          <p>Penrith, St Marys, Windsor, Richmond and surrounds.</p>
+        </div>
+        <div class="card">
+          <h3>Blue Mountains</h3>
+          <p>Katoomba, Springwood, Lawson, Leura and surrounds.</p>
+        </div>
+      </div>
+
+      <div class="service-actions">
+        <a class="pill pill--call" href="tel:+61415339117">Call +61 415 339 117</a>
+        <a class="pill pill--sms" href="sms:+61415339117">SMS</a>
+      </div>
+
+      <span class="suburbs-note">Not sure if you’re covered? SMS us and we’ll help.</span>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div>© <span id="year"></span> Greater Western Sydney Injury Dental</div>
+      <div>
+        <a href="tel:+61415339117">+61 415 339 117</a>
+        <span class="dot">•</span>
         <a href="sms:+61415339117">SMS</a>
-      </span>
+      </div>
     </div>
 
-    <p>
-      Disclaimer: WorkCover eligibility, approvals and funding are subject to insurer
-      determination and applicable guidelines. Information on this website is general
-      in nature and does not replace professional dental or medical advice.
-      In an emergency, call <strong>000</strong>.
-    </p>
-  </div>
-</footer>
+    <div class="container tiny" style="margin-top:10px;">
+      Disclaimer: WorkCover eligibility, approvals and funding are subject to insurer determination and applicable
+      guidelines. Information is general and does not replace professional dental or medical advice. In an emergency,
+      call <strong>000</strong>.
+    </div>
+  </footer>
 
-<script>
-  document.getElementById("year").textContent = new Date().getFullYear();
-</script>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // mobile menu toggle
+    const toggle = document.querySelector(".nav__toggle");
+    const menu = document.querySelector(".nav__menu");
+
+    if (toggle && menu) {
+      toggle.addEventListener("click", () => {
+        const open = menu.classList.toggle("is-open");
+        toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+
+      // close menu after clicking a link (mobile)
+      menu.querySelectorAll("a").forEach(a => {
+        a.addEventListener("click", () => {
+          menu.classList.remove("is-open");
+          toggle.setAttribute("aria-expanded", "false");
+        });
+      });
+    }
+  </script>
 
 </body>
 </html>
+
 
