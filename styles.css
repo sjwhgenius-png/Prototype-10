@@ -362,4 +362,16 @@ a:hover{ text-decoration:underline; text-underline-offset:4px; }
 
   .topbar__msg{ max-width:66%; }
 }
+.topbar__short {
+  display: none;
+}
+
+@media (max-width: 760px) {
+  .topbar__full {
+    display: none;
+  }
+  .topbar__short {
+    display: inline;
+  }
+}
 
