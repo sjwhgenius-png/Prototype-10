@@ -20,6 +20,7 @@
 
 *{ box-sizing:border-box; }
 html{ scroll-behavior:smooth; }
+
 body{
   margin:0;
   font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
@@ -57,19 +58,24 @@ a:hover{ text-decoration:underline; text-underline-offset:4px; }
   gap:12px;
   padding:10px 0;
 }
+
+/* IMPORTANT: allow proper flex shrinking (prevents weird truncation) */
 .topbar__msg{
   line-height:1.25;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
+  min-width:0;
+  flex:1;
 }
 .topbar__links{
   display:flex;
   align-items:center;
   white-space:nowrap;
+  flex:0 0 auto;
 }
 .topbar__link{ opacity:.95; }
 .topbar__link:hover{ opacity:1; text-decoration:none; }
+
+/* full vs short message swap */
+.topbar__short{ display:none; }
 
 /* HEADER */
 .header{
@@ -303,8 +309,12 @@ a:hover{ text-decoration:underline; text-underline-offset:4px; }
   .brand{ min-width:auto; }
 }
 
-/* FIX: phone layout + top bar + safe padding */
+/* MOBILE */
 @media (max-width: 760px){
+  /* show short message on mobile */
+  .topbar__full{ display:none; }
+  .topbar__short{ display:inline; }
+
   .topbar__inner{
     flex-direction:row;
     justify-content:space-between;
@@ -312,7 +322,7 @@ a:hover{ text-decoration:underline; text-underline-offset:4px; }
   }
   .topbar__msg{
     font-size:12.5px;
-    max-width:70%;
+    white-space:nowrap; /* short stays clean */
   }
   .topbar__links{
     font-size:12.5px;
@@ -359,19 +369,6 @@ a:hover{ text-decoration:underline; text-underline-offset:4px; }
     width:100%;
     justify-content:center;
   }
-
-  .topbar__msg{ max-width:66%; }
-}
-.topbar__short {
-  display: none;
 }
 
-@media (max-width: 760px) {
-  .topbar__full {
-    display: none;
-  }
-  .topbar__short {
-    display: inline;
-  }
-}
 
